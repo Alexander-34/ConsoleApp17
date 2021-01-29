@@ -1,50 +1,47 @@
 ﻿using System;
 using static System.Console;
+using System.Windows.Input;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp17
-{
+namespace ConsoleApp17 { 
+
+    class Day : IComparable
+    {
+        public Day(int number)
+        {
+            Number = number;
+        }
+
+        public int Number { get; set; }
+
+        public int CompareTo(object obj)
+        {
+            if (Number == (obj as Day).Number)
+            {
+                return 0;
+            }
+            return Number > (obj as Day).Number ? 1 : -1;
+        }
+    }
     class Program
     {
-        interface A
-        {
-            void Print();
-        }
-        interface B
-        {
-            void Print();
-        }
-        interface C
-        {
-            void Print();
-        }
-        class Runnable : A, B, C
-        {
-            public void Print()
-            {
-                WriteLine("Runnable");
-            }
-            void A.Print()
-            {
-                WriteLine("Runnable A");
-            }
-            void B.Print()
-            {
-                WriteLine("Runnable B");
-            }
-            void C.Print()
-            {
-                WriteLine("Runnable C");
-            }
-        }
         static void Main(string[] args)
         {
-            A r = new Runnable();
-            r.Print();          
-            
+            Day[] days = {
+                new Day(2000000000),
+                new Day(2),
+                new Day(5),
+                new Day(-2000000000),
+            };
+            Array.Sort(days);
+            foreach (Day day in days)
+            {
+                WriteLine(day.Number);
+            }
             ReadKey();
         }
     }
