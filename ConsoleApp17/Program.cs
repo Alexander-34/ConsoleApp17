@@ -9,17 +9,42 @@ namespace ConsoleApp17
 {
     class Program
     {
-        interface IRunnable
+        interface A
         {
-            int A { get; set; }
-            int this[int i] { get; set; }
+            void Print();
         }
-        class Runnable : IRunnable
+        interface B
         {
-            public int this [int i] { get; set; }
+            void Print();
+        }
+        interface C
+        {
+            void Print();
+        }
+        class Runnable : A, B, C
+        {
+            public void Print()
+            {
+                WriteLine("Runnable");
+            }
+            void A.Print()
+            {
+                WriteLine("Runnable A");
+            }
+            void B.Print()
+            {
+                WriteLine("Runnable B");
+            }
+            void C.Print()
+            {
+                WriteLine("Runnable C");
+            }
         }
         static void Main(string[] args)
         {
+            A r = new Runnable();
+            r.Print();          
+            
             ReadKey();
         }
     }
